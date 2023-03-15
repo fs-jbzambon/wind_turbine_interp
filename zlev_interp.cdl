@@ -1,0 +1,62 @@
+netcdf hub_height {
+dimensions:
+    Time = UNLIMITED ;
+    DateStrLen = 19 ;
+    west_east = 829 ;
+    south_north = 1149 ;
+    bottom_top = 1;
+variables:
+        char Times(Time, DateStrLen) ;
+        double z(bottom_top) ;
+                z:long_name = "Hub Height above Ground" ;
+                z:units = "m" ;
+        float XLAT(Time, south_north, west_east) ;
+                XLAT:FieldType = 104 ;
+                XLAT:MemoryOrder = "XY " ;
+                XLAT:description = "LATITUDE, SOUTH IS NEGATIVE" ;
+                XLAT:units = "degree_north" ;
+                XLAT:stagger = "" ;
+                XLAT:coordinates = "XLONG XLAT" ;
+        float XLONG(Time, south_north, west_east) ;
+                XLONG:FieldType = 104 ;
+                XLONG:MemoryOrder = "XY " ;
+                XLONG:description = "LONGITUDE, WEST IS NEGATIVE" ;
+                XLONG:units = "degree_east" ;
+                XLONG:stagger = "" ;
+                XLONG:coordinates = "XLONG XLAT" ;
+        float LANDMASK(Time, south_north, west_east) ;
+                LANDMASK:FieldType = 104 ;
+                LANDMASK:MemoryOrder = "XY " ;
+                LANDMASK:description = "LAND MASK (1 FOR LAND, 0 FOR WATER)" ;
+                LANDMASK:units = "" ;
+                LANDMASK:stagger = "" ;
+                LANDMASK:coordinates = "XLONG XLAT XTIME" ;
+        float u_tr_z(Time, bottom_top, south_north, west_east) ;
+                u_tr_z:long_name = "u-Component of Wind (Earth)" ;
+                u_tr_z:standard_name = "eastward_wind" ;
+                u_tr_z:units = "m s-1" ;
+                u_tr_z:_FillValue = 1.e+20f ;
+                u_tr_z:coordinates = "lon lat" ;
+        float v_tr_z(Time, bottom_top, south_north, west_east) ;
+                v_tr_z:long_name = "v-Component of Wind (Earth)" ;
+                v_tr_z:standard_name = "northward_wind" ;
+                v_tr_z:units = "m s-1" ;
+                v_tr_z:_FillValue = 1.e+20f ;
+                v_tr_z:coordinates = "lon lat" ;
+        float ws_z(Time, bottom_top, south_north, west_east) ;
+                ws_z:_FillValue = 1.e+20f ;
+                ws_z:long_name = "Wind Speed" ;
+                ws_z:standard_name = "wind_speed" ;
+                ws_z:units = "m s-1" ;
+                ws_z:coordinates = "lon lat" ;
+        float wd_z(Time, bottom_top, south_north, west_east) ;
+                wd_z:_FillValue = 1.e+20f ;
+                wd_z:long_name = "Wind Direction (Earth)" ;
+                wd_z:standard_name = "wind_from_direction" ;
+                wd_z:units = "degree" ;
+                wd_z:coordinates = "lon lat" ;
+// global attributes:
+        :Conventions = "CF-1.0" ;
+        :title = "jbzambon hub-height interpolated file" ;
+}
+
